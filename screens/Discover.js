@@ -2,16 +2,17 @@ import { View, Text, SafeAreaView, Image, ScrollView, TouchableOpacity, Activity
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { useNavigation } from '@react-navigation/native';
-import { Attractions, Avatar, Hotels, Restaurants, NotFound} from '../assets';
+import { Attractions, Avatar, Hotels, Restaurants, NotFound,WishList, PlanetFitness, FitnessWorld, GoodLife} from '../assets';
 import MenuContainer from '../components/MenuContainer';
 import { FontAwesome } from '@expo/vector-icons';
 import ItemCardContainer from '../components/ItemCardContainer';
 import { getPlacesData } from '../api';
 
 
+
 const Discover = () => {
 
- const [type, setType] = useState("restorants")
+ const [type, setType] = useState("Attractions")
 
     const navigation = useNavigation();
     const[isLoading,setIsLoading]=useState(false)
@@ -38,7 +39,7 @@ const Discover = () => {
 
   return (
 
-        <SafeAreaView className = "flex-1 bg-white relative">
+        <SafeAreaView className = "flex-1 bg-[#191919] relative">
             <View className = "flex-row items-center justify-between px-8">
                 <View>
                     <Text className = "text-[40px] text-[#0B646B] font-bold">
@@ -49,6 +50,9 @@ const Discover = () => {
                         France today
                     </Text>
                 </View>
+                <TouchableOpacity onPress ={() => navigation.navigate("WishListScreen")} className="w-16 h-16 rounded-md item-center justify-center shadow-lg">
+      <Image source={WishList} className="w-full h-full rounded-md object-cover"/>
+      </TouchableOpacity>
 
                 <View className = "w-12 h-12 bg-red-400 rounded-md items-center justify-center shadow-lg">
                     <Image source={Avatar} className = " w-full h-full rounded-md object-cover"/>
@@ -86,7 +90,7 @@ const Discover = () => {
                         <MenuContainer
                         key={"hotels"}
                         title = {"Hotels"}
-                        imageSrc = {Hotels}
+                        imageSrc = {PlanetFitness}
                         type = {type}
                         setType = {setType}
                         />
@@ -95,7 +99,7 @@ const Discover = () => {
                         
                         key={"attractions"}
                         title = {"Attractions"}
-                        imageSrc = {Attractions}
+                        imageSrc = {FitnessWorld}
                         type = {type}
                         setType = {setType}
                         />
@@ -104,7 +108,7 @@ const Discover = () => {
                         
                         key={"Restaurants"}
                         title = {"Restaurants"}
-                        imageSrc = {Restaurants}
+                        imageSrc = {GoodLife}
                         type = {type}
                         setType = {setType}
                         />

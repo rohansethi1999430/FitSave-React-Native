@@ -7,7 +7,7 @@ const MenuContainer = ({title,imageSrc, type,setType}) => {
     }
   return (
     <TouchableOpacity className = "items-center justify-center space-y-2" onPress={handelPress}>
-        <View className = {`w-24 h-24 shadow-sm  p-2 rounded-md  items-center justify-center ${type === title.toLowerCase() ? "bg-gray-200":"" }`} > 
+        <View className = {`w-24 h-24 shadow-sm   rounded-md  items-center justify-center ${type === title.toLowerCase() ? "bg-gray-200":"" }`} > 
             <Image
             source={imageSrc} className = "w-full h-full object-contain"
             />

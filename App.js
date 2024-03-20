@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Discover from './screens/Discover';
 import ItemScreen from './screens/ItemScreen';
 import Explore from './screens/Explore';
+import WishListScreen from './screens/WishListScreen';
 
 
  const Stack = createNativeStackNavigator();
@@ -20,6 +21,7 @@ export default function App() {
       <Stack.Screen name = "Discover" component={Discover}/>
       <Stack.Screen name = "ItemScreen" component={ItemScreen}/>
       <Stack.Screen name = "Explore" component={ Explore}/>
+      <Stack.Screen name = "WishListScreen" component={WishListScreen}/>
     </Stack.Navigator>
   </NavigationContainer>
   );
