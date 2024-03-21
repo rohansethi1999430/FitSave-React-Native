@@ -9,6 +9,7 @@ import Discover from './screens/Discover';
 import ItemScreen from './screens/ItemScreen';
 import Explore from './screens/Explore';
 import WishListScreen from './screens/WishListScreen';
+import Plans from './screens/Plans';
 
 
  const Stack = createNativeStackNavigator();
@@ -22,6 +23,7 @@ export default function App() {
       <Stack.Screen name = "ItemScreen" component={ItemScreen}/>
       <Stack.Screen name = "Explore" component={ Explore}/>
       <Stack.Screen name = "WishListScreen" component={WishListScreen}/>
+      <Stack.Screen name = "Plans" component={Plans}/>
     </Stack.Navigator>
   </NavigationContainer>
   );

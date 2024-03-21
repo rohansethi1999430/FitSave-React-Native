@@ -38,7 +38,7 @@ const [searchResults, setSearchResults] = useState([]);
                     </Text>
 
                     <Text className = "text-[#E3651D] text-[36px] font-semibold">
-                    Plans
+                    GYM Plans
                     </Text>
                 </View>
 

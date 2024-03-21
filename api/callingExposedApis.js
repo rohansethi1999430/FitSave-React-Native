@@ -2,13 +2,25 @@ import axios from 'axios';
 
 export const dataForLikes = async () => {
   try {
-    const data= await axios.get('http://192.168.2.35:3000/getData');
+    const data= await axios.get('http://192.168.2.20:3000/getData');
     return data;
   } catch (error) {
     console.error(error);
     return null;
   }
  
+};
+
+export const fTApi = async () => {
+  try {
+    const response = await axios.get('http://192.168.2.20:8080/getFTDetails/windsor');
+    // With Axios, the response data is automatically parsed as JSON.
+    const data = response.data; // This is your JSON data.
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 };
 
 
