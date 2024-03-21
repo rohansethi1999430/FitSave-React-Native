@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const dataForLikes = async () => {
   try {
-    const data= await axios.get('http://192.168.2.20:3000/getData');
+    const data= await axios.get('http://10.71.42.229:3000/getData');
     return data;
   } catch (error) {
     console.error(error);
@@ -13,7 +13,7 @@ export const dataForLikes = async () => {
 
 export const fTApi1 = async () => {
   try {
-    const response = await axios.get('http://192.168.2.20:8080/getFTDetails/windsor');
+    const response = await axios.get('http://10.71.42.229:8080/getFTDetails/windsor');
     // With Axios, the response data is automatically parsed as JSON.
     const data = response.data; // This is your JSON data.
     return data;
@@ -25,7 +25,7 @@ export const fTApi1 = async () => {
 
 export const fTApi2 = async () => {
   try {
-    const response = await axios.get('http://192.168.2.20:8080/getGlOutput/windsor');
+    const response = await axios.get('http://10.71.42.229:8080/getGlOutput/windsor');
     // With Axios, the response data is automatically parsed as JSON.
     const data = response.data; // This is your JSON data.
     return data;
@@ -37,7 +37,7 @@ export const fTApi2 = async () => {
 
 export const fTApi3 = async () => {
   try {
-    const response = await axios.get('http://192.168.2.20:8080/getPFOutput/windsor');
+    const response = await axios.get('http://10.71.42.229:8080/getPFOutput/windsor');
     // With Axios, the response data is automatically parsed as JSON.
     const data = response.data; // This is your JSON data.
     return data;
@@ -51,7 +51,7 @@ export const fTApi3 = async () => {
 
 export const savingLikedData = function saveDataToMongoDB(data) {
   console.log(data)
-  fetch('http://192.168.2.35:3000/saveData', {
+  fetch('http://10.71.42.229:3000/saveData', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
