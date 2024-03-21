@@ -11,7 +11,7 @@ export const dataForLikes = async () => {
  
 };
 
-export const fTApi = async () => {
+export const fTApi1 = async () => {
   try {
     const response = await axios.get('http://192.168.2.20:8080/getFTDetails/windsor');
     // With Axios, the response data is automatically parsed as JSON.
@@ -22,6 +22,31 @@ export const fTApi = async () => {
     return null;
   }
 };
+
+export const fTApi2 = async () => {
+  try {
+    const response = await axios.get('http://192.168.2.20:8080/getGlOutput/windsor');
+    // With Axios, the response data is automatically parsed as JSON.
+    const data = response.data; // This is your JSON data.
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const fTApi3 = async () => {
+  try {
+    const response = await axios.get('http://192.168.2.20:8080/getPFOutput/windsor');
+    // With Axios, the response data is automatically parsed as JSON.
+    const data = response.data; // This is your JSON data.
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 
 
 export const savingLikedData = function saveDataToMongoDB(data) {

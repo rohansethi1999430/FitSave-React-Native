@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 import ItemCardContainer from '../components/ItemCardContainer'; // Adjust the path as necessary
-import { fTApi } from '../api/callingExposedApis';
+import { fTApi2 } from '../api/callingExposedApis';
 
-const Plans = () => {
+const Plans2 = () => {
   const [mainData, setMainData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -11,7 +11,7 @@ const Plans = () => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const data = await fTApi();
+        const data = await fTApi2();
         console.log(data);
         setMainData(data); // Make sure this matches the structure expected by your FlatList and ItemCardContainer
         setIsLoading(false); // Move the loading state change here to immediately reflect the fetched data
@@ -55,4 +55,4 @@ const Plans = () => {
   );
 };
 
-export default Plans;
+export default Plans2;

@@ -1,12 +1,12 @@
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import React, { useLayoutEffect, useState, useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 
 const DATA = [
-  { id: '1', title: 'Good Life Fitness', translate: "Discover the Culture of France" },
-  { id: '2', title: 'Fitness World', translate: "Learn French" },
-  { id: '3', title: 'Planet Fitness', translate: "Discover the French cuisine" },
-  { id: '4', title: 'Best Deal', translate: "History of France" },
+  { id: '1', title: 'Fitness World'},
+  { id: '2', title:  'Good Life Fitness'},
+  { id: '3', title: 'Planet Fitness'},
+  { id: '4', title: 'Best Deal'},
 ];
 
 const FlatListWithTailwind = () => {
@@ -18,16 +18,21 @@ const FlatListWithTailwind = () => {
     });
   }, [navigation]);
 
-  // Define renderItem inside FlatListWithTailwind to access navigation
+  const navigateToScreen = (id) => {
+    // Determine the screen to navigate to based on the id
+    const screenName = `Plans${id}`;
+    navigation.navigate(screenName);
+  };
+
   const renderItem = ({ item }) => (
     <TouchableOpacity
-      onPress={() => navigation.navigate("Plans")}
+      onPress={() => navigateToScreen(item.id)}
       className="flex-row items-center justify-between space-x-2 p-4 my-2"
     >
       <Text className="text-2xl text-[#E3651D] rounded-md text-[20px] font-semibold ">
         {item.title}
       </Text>
-      {/* Place your FontAwesome icon here */}
+      
     </TouchableOpacity>
   );
 
