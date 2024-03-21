@@ -1,12 +1,58 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import { View, Text, FlatList, ActivityIndicator } from 'react-native';
+import ItemCardContainer from '../components/ItemCardContainer'; // Adjust the path as necessary
+import { fTApi4 } from '../api/callingExposedApis';
 
 const Plans4 = () => {
-  return (
-    <View>
-      <Text>Plans4</Text>
-    </View>
-  )
-}
+  const [mainData, setMainData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-export default Plans4
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const data = await fTApi4();
+        console.log(data);
+        setMainData(data); // Make sure this matches the structure expected by your FlatList and ItemCardContainer
+        setIsLoading(false); // Move the loading state change here to immediately reflect the fetched data
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setIsLoading(false); // Ensure loading state is also set to false on error
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (isLoading) {
+    // Show loading indicator while data is being fetched
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <FlatList
+        data={mainData}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={
+            
+            ({ item }) => (
+          <ItemCardContainer
+            title={item.gymName}
+            location={item._id} // Adjust if you have a location or other data to show
+            data={item}
+          
+          />
+       
+        )
+    }
+      />
+    </View>
+  );
+};
+
+export default Plans4;
