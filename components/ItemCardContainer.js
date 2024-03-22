@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity,FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const ItemCardContainer = ({ title, data }) => {
+const ItemCardContainer = ({ title, location,data }) => {
   const navigation = useNavigation();
 
   return (
@@ -10,9 +10,11 @@ const ItemCardContainer = ({ title, data }) => {
       className=" rounded-3xl border-white space-y-2 px-3 py-2 shadow-md w-[300px] my-2 bg-gray-700 justify-center p-5"
       onPress={() => navigation.navigate("ItemScreen", { param: data })}
     >
-      <View className = "flex-row">
-      <Text className="text-[#BED754] text-[18px] font-bold">
+      <Text className="text-[#428288] text-[18px] font-bold">
         {title?.length > 14 ? `${title.slice(0, 14)}...` : title}
+      </Text>
+      <Text className="text-[#8597A2] text-[18px]">
+      {location?.length > 14 ? `${location.slice(0, 14)}...` : location}
       </Text>
       <Text className="text-[#BED754] text-[18px] font-semibold ml-2">
         

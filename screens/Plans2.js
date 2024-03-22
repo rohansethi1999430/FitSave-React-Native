@@ -3,7 +3,8 @@ import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 import ItemCardContainer from '../components/ItemCardContainer'; // Adjust the path as necessary
 import { fTApi2 } from '../api/callingExposedApis';
 
-const Plans2 = () => {
+const Plans2 = ({ route }) => {
+  const { searchQuery } = route.params;
   const [mainData, setMainData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -11,7 +12,7 @@ const Plans2 = () => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const data = await fTApi2();
+        const data = await fTApi2(searchQuery);
         console.log(data);
         setMainData(data); // Make sure this matches the structure expected by your FlatList and ItemCardContainer
         setIsLoading(false); // Move the loading state change here to immediately reflect the fetched data
