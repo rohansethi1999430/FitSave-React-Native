@@ -3,7 +3,7 @@ import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 import ItemCardContainer from '../components/ItemCardContainer'; // Adjust the path as necessary
 import { fTApi4 } from '../api/callingExposedApis';
 
-const Plans4 = () => {
+const Plans4 = ({searchQuery}) => {
   const [mainData, setMainData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 

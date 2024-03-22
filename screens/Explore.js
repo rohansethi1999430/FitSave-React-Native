@@ -20,8 +20,9 @@ useLayoutEffect(() =>{
 const handleSearch = async (query) => {
   setSearchQuery(query);
   try {
-    const response = await axios.get(`https://your-api-url.com/search?query=${query}`);
-    setSearchResults(response.data);
+    console.log(query);
+    //const response = await axios.get(`https://your-api-url.com/search?query=${query}`);
+    //setSearchResults(response.data);
   } catch (error) {
     console.error('Error fetching data:', error);
   }
@@ -70,13 +71,10 @@ const [searchResults, setSearchResults] = useState([]);
               source={{uri : "https://medias-prepare.paris2024.org/uploads/2020/11/20201106-JO2024-Centres-de-Pre%CC%81paration-Les-re%CC%81gions-franc%CC%A7aises-Frise-scaled.jpg?x-oss-process=image/resize,w_2560,h_1031,m_lfit/format,webp"}}
               className=" h-60  rounded-md p-1 "
             /> */}
-            <Animatable.Image
-              animation="fadeIn"
-              easing="ease-in-out"
-              source={ExplorePlans}
-              className = "w-full h-[30%]  object-cover p-2 mt-4"
-            />
-                <FlatListWithTailwind></FlatListWithTailwind>
+            
+                <FlatListWithTailwind searchQuery={searchQuery}>
+                  {console.log(searchQuery)}
+                </FlatListWithTailwind>
 
                 
             </View>

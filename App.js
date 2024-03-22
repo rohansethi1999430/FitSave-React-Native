@@ -13,6 +13,8 @@ import Plans1 from './screens/Plans1';
 import Plans2 from './screens/Plans2';
 import Plans3 from './screens/Plans3';
 import Plans4 from './screens/Plans4';
+import Plans5 from './screens/Plans5';
+import SearchedResults from './screens/SearchedResults';
 
  const Stack = createNativeStackNavigator();
 
@@ -29,6 +31,8 @@ export default function App() {
       <Stack.Screen name = "Plans2" component={Plans2}/>
       <Stack.Screen name = "Plans3" component={Plans3}/>
       <Stack.Screen name = "Plans4" component={Plans4}/>
+      <Stack.Screen name = "Plans5" component={Plans5}/>
+      <Stack.Screen name = "SearchedResults" component={SearchedResults}/>
     </Stack.Navigator>
   </NavigationContainer>
   );
