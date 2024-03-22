@@ -23,8 +23,8 @@ const FlatListWithTailwind = ({searchQuery}) => {
     // Determine the screen to navigate to based on the id
     const screenName = `Plans${id}`;
     // Navigate and pass searchQuery along with it
-    navigation.navigate(screenName, { searchQuery });
-  };
+    navigation.navigate(screenName, { searchQuery: searchQuery });
+  };  
 
   const renderItem = ({ item }) => (
     

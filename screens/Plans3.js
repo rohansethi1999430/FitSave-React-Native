@@ -3,7 +3,8 @@ import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 import ItemCardContainer from '../components/ItemCardContainer'; // Adjust the path as necessary
 import { fTApi3 } from '../api/callingExposedApis';
 
-const Plans3 = ({searchQuery}) => {
+const Plans3 = ({ route }) => {
+  const { searchQuery } = route.params;
   const [mainData, setMainData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 

@@ -3,10 +3,12 @@ import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 import ItemCardContainer from '../components/ItemCardContainer'; // Adjust the path as necessary
 import { fTApi1 } from '../api/callingExposedApis';
 
-const Plans1 = ({searchQuery}) => {
+const Plans1 = ({ route }) => {
+  const { searchQuery } = route.params;
   const [mainData, setMainData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   console.log("Plans1"+searchQuery)
+
   useEffect(() => {
     const fetchData = async () => {
       try {
