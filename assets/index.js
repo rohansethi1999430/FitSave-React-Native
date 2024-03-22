@@ -10,3 +10,4 @@ export { default as ExplorePlans } from "./gym3.jpg";
 export { default as PlanetFitness } from "./Planet.png";
 export { default as GoodLife } from "./Goodlife.png";
 export { default as FitnessWorld } from "./FitnessWorld.png";
+export { default as Animation } from "./Animation.json";

@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView,Image, TouchableOpacity,TextInput} from 'react-native'
+import { View, Text, SafeAreaView,Image, TouchableOpacity,TextInput,FlatList} from 'react-native'
 import React, { useLayoutEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
  import  {ExplorePlans, HeroImage}  from '../assets/index';
@@ -7,6 +7,8 @@ import { useNavigation } from '@react-navigation/native'
 import FlatListWithTailwind from '../components/FlatListWithTailwind';
 import { SearchBar } from 'react-native-elements';
 import { FontAwesome } from '@expo/vector-icons';
+import LottieView from 'lottie-react-native';
+import axios from 'axios';
 const Explore = () => {
 
     const navigation = useNavigation();
@@ -20,7 +22,11 @@ useLayoutEffect(() =>{
 const handleSearch = async (query) => {
   setSearchQuery(query);
   try {
-    const response = await axios.get(`https://your-api-url.com/search?query=${query}`);
+    console.log(searchQuery);
+    console.log(query);
+    const response = await axios.get(`http://192.168.2.35:8080/manualSearchList/${query}`);
+    
+    console.log(response.data);
     setSearchResults(response.data);
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -28,6 +34,11 @@ const handleSearch = async (query) => {
 };
 const [searchQuery, setSearchQuery] = useState('');
 const [searchResults, setSearchResults] = useState([]);
+const renderSearchResult = ({ item }) => (
+  <TouchableOpacity onPress={() => handleSearch(item)} className = " mr-5 border-white border-2 rounded-2xl p-2">
+      <Text className = " text-red-400 text-[18px]">{item}</Text>
+  </TouchableOpacity>
+);
 
   return (
 <SafeAreaView className = "bg-[#191919] flex-1 relative">
@@ -49,7 +60,7 @@ const [searchResults, setSearchResults] = useState([]);
               <View className = "p-4 flex-row justify-between items-center">
 
                   <TextInput
-                    placeholder="Search with '*' in the end..."
+                    placeholder="Search ..."
                     onChangeText={handleSearch}
                     value={searchQuery}
                     className = "bg-white text-black rounded-2xl p-4 px-5 w-[90%]"
@@ -59,23 +70,31 @@ const [searchResults, setSearchResults] = useState([]);
                 <FontAwesome name="search" size={24} color="white" />
                 </TouchableOpacity>
 
+
               </View>
 
-              <TouchableOpacity>
-                
+              <TouchableOpacity className  = "flex-row">
+                            <View className = "flex-row p-3">
+                {/* <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 10 }}>Search Recommendations:</Text> */}
+                <FlatList
+                    data={searchResults}
+                    renderItem={renderSearchResult}
+                    keyExtractor={(item, index) => index.toString()}
+                    className = "flex-row"
+                    horizontal={true}
+                />
+            </View>
               </TouchableOpacity>
 
             <View>
-            {/* <Image
-              source={{uri : "https://medias-prepare.paris2024.org/uploads/2020/11/20201106-JO2024-Centres-de-Pre%CC%81paration-Les-re%CC%81gions-franc%CC%A7aises-Frise-scaled.jpg?x-oss-process=image/resize,w_2560,h_1031,m_lfit/format,webp"}}
-              className=" h-60  rounded-md p-1 "
-            /> */}
-            <Animatable.Image
-              animation="fadeIn"
-              easing="ease-in-out"
-              source={ExplorePlans}
-              className = "w-full h-[30%]  object-cover p-2 mt-4"
-            />
+
+
+            <LottieView
+                    source={require('../assets/Animation.json')} // Replace 'animation.json' with the path to your animation file
+                    autoPlay
+                    loop
+                    className = "w-full h-[25%]  object-cover p-2 mt-1"
+                  />
                 <FlatListWithTailwind></FlatListWithTailwind>
 
                 
