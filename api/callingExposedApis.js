@@ -7,7 +7,7 @@ export const fTApi1 = async (location) => {
       return 'You need to search for something';
     }
     console.log(location);
-    const response = await axios.get(`http://192.168.2.20:8080/getFTDetails/${location}`);
+    const response = await axios.get(`http://192.168.2.35:8080/getFTDetails/${location}`);
     // With Axios, the response data is automatically parsed as JSON.
     const data = response.data; // This is your JSON data.
     return data;
@@ -22,7 +22,7 @@ export const fTApi2 = async (location) => {
     if(location===''){
       return 'You need to search for something';
     }
-    const response = await axios.get(`http://192.168.2.20:8080/getGlOutput/${location}`);
+    const response = await axios.get(`http://192.168.2.35:8080/getGlOutput/${location}`);
     // With Axios, the response data is automatically parsed as JSON.
     const data = response.data; // This is your JSON data.
     return data;
@@ -37,7 +37,7 @@ export const fTApi3 = async (location) => {
     if(location===''){
       return 'You need to search for something';
     }
-    const response = await axios.get(`http://192.168.2.20:8080/getPFOutput/${location}`);
+    const response = await axios.get(`http://192.168.2.35:8080/getPFOutput/${location}`);
     // With Axios, the response data is automatically parsed as JSON.
     const data = response.data; // This is your JSON data.
     return data;
@@ -48,7 +48,7 @@ export const fTApi3 = async (location) => {
 };
 export const fTApi4 = async (location) => {
   try {
-    const response = await axios.get('http://192.168.2.20:8080/bestDeals');
+    const response = await axios.get('http://192.168.2.35:8080/bestDeals');
     // With Axios, the response data is automatically parsed as JSON.
     const data = response.data; // This is your JSON data.
     return data;
@@ -60,7 +60,7 @@ export const fTApi4 = async (location) => {
 
 export const searchedResultsFunction = async (searchText) => {
   try {
-    const response = await axios.post('http://192.168.2.20:8080/invertedIndexing', {
+    const response = await axios.post('http://192.168.2.35:8080/invertedIndexing', {
       params: {
         text: searchText
       }

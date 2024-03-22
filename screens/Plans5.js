@@ -16,6 +16,7 @@ const Plans5 = () => {
   const handleSearch = () => {
     Keyboard.dismiss(); // Dismiss keyboard when searching
     // Navigate to SearchedResults with the searchQuery as parameter
+    console.log("Search query 123 " + searchQuery)
     navigation.navigate('SearchedResults', { searchQuery });
   };
 
