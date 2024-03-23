@@ -6,16 +6,22 @@ import * as Animatable from 'react-native-animatable';
 import { Attractions, Avatar, Hotels, Restaurants, NotFound} from '../assets';
 import FlatListWithTailwind from '../components/FlatListWithTailwind';
 import { SearchBar } from 'react-native-elements';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, Feather } from '@expo/vector-icons';
 import LottieView from 'lottie-react-native';
 import axios from 'axios';
 const Explore = () => {
  
+  
+  const [isToggled, setIsToggled] = useState(false);
 
+  // const toggleSwitch = () => {
+  //   setIsToggled(!isToggled);
+  // };
 
     const navigation = useNavigation();
     const [isManualSearch, setIsManualSearch] = useState(true);
     const [searchHistoryResults, setSearchHistoryResults] = useState([]);
+    
 
  
 useLayoutEffect(() =>{
@@ -41,6 +47,7 @@ const handleSearch = async (query) => {
 };
 
 const handleHistorySearch = async () => {
+  setIsToggled(!isToggled);
   try {
     const response = await axios.get('http://10.71.52.226:8080/historySearchList/history');
     const searchHistory = Object.keys(response.data);
@@ -85,11 +92,20 @@ const renderSearchResult = ({ item }) => {
 
               </View>
               <View className = "items-center">
-              <TouchableOpacity onPress={() => setIsManualSearch(!isManualSearch)} className = " bg-[#BED754] rounded-2xl p-2 w-[45%]">
+              {/* <TouchableOpacity onPress={() => setIsManualSearch(!isManualSearch)} className = " bg-[#BED754] rounded-2xl p-2 w-[45%]">
                 <Text className = "font-semibold text-xl text-black">{isManualSearch ? 'Switch to History' : 'Switch to Manual Search'}</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
+                <TouchableOpacity onPress={() => setIsToggled(!isToggled)}>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        {isToggled ? (
+          <Feather name="toggle-left" size={35} color="white" />
+        ) : (
+          <Feather name="toggle-right" size={35} color="white" />
+        )}
+      </View>
+    </TouchableOpacity>
               </View>
-              {isManualSearch ? (
+              {isToggled ? (
 <View style={{ padding: 10 }}>
 <View className = "p-4 flex-row justify-between items-center">
  

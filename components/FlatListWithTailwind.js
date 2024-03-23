@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import React, { useState} from 'react';
+import { View, Text, FlatList, TouchableOpacity,Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const DATA = [
@@ -15,9 +15,23 @@ const FlatListWithTailwind = ({ searchQuery }) => {
   const [selectedItemId, setSelectedItemId] = useState(null);
 
   const navigateToScreen = (id) => {
+    console.log("id is",id)
+    console.log("navigateToScreen",searchQuery)
+    if (!searchQuery && (id === '1' || id === '2' || id === '3')) {
+      Alert.alert('Alert', 'You have to pass something to click these');
+      return;
+    }
+    const containsNumbersOrNonAlphabetic = /[0-9]|[^a-zA-Z]/.test(searchQuery);
+
+  if (containsNumbersOrNonAlphabetic && (id === '1' || id === '2' || id === '3')) {
+    Alert.alert('Alert', 'Search query contains numbers or non-alphabetic characters. Please remove them and try again.');
+    return;
+  }
+    // Determine the screen to navigate to based on the id
     const screenName = `Plans${id}`;
     navigation.navigate(screenName, { searchQuery: searchQuery });
   };
+
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
