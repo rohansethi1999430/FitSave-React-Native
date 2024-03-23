@@ -11,6 +11,8 @@ import LottieView from 'lottie-react-native';
 import axios from 'axios';
 const Explore = () => {
  
+
+
     const navigation = useNavigation();
     const [isManualSearch, setIsManualSearch] = useState(true);
     const [searchHistoryResults, setSearchHistoryResults] = useState([]);
@@ -21,27 +23,26 @@ useLayoutEffect(() =>{
     headerShown:false,
   })
 },[])
-useEffect(() => {
-  handleHistorySearch();
-}, []);
+
  
 const handleSearch = async (query) => {
   setSearchQuery(query);
   if (query.trim().length > 0) {
     try {
-      const response = await axios.get(`http://172.20.10.2:8080/manualSearchList/${query}`);
+      const response = await axios.get(`http://10.71.52.226:8080/manualSearchList/${query}`);
       setSearchResults(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
-      // Alert.alert('Error', 'Failed to fetch data. Please try again later.');
+      Alert.alert('Error', 'Failed to fetch data. Please try again later.');
     }
   } else {
     setSearchResults([]);
   }
 };
+
 const handleHistorySearch = async () => {
   try {
-    const response = await axios.get('http://172.20.10.2:8080/historySearchList/history');
+    const response = await axios.get('http://10.71.52.226:8080/historySearchList/history');
     const searchHistory = Object.keys(response.data);
     setSearchHistoryResults(searchHistory);
   } catch (error) {
@@ -49,13 +50,16 @@ const handleHistorySearch = async () => {
   //  Alert.alert('Error', 'Failed to fetch data. Please try again later.');
   }
 };
+useEffect(() => {
+  handleHistorySearch();
+}, []);
 const [searchQuery, setSearchQuery] = useState('');
 const [searchResults, setSearchResults] = useState([]);
 const renderSearchResult = ({ item }) => {
   const nonActionableMessages = ["please type alphabet for search", "you are typing wrong"];
   const isNonActionableMessage = nonActionableMessages.includes(item);
   return(
-  <TouchableOpacity onPress={() => !isNonActionableMessage && handleSearch(item)} className = " mr-5 border-white border-2 rounded-2xl p-2 " disabled={isNonActionableMessage}>
+  <TouchableOpacity onPress={() =>  !isNonActionableMessage && handleSearch(item)} className = " mr-5 border-white border-2 rounded-2xl p-2" disabled={isNonActionableMessage} >
       <Text className = " text-red-400 text-[18px]">{item}</Text>
   </TouchableOpacity>
 )};
@@ -78,22 +82,30 @@ const renderSearchResult = ({ item }) => {
                 <View className = "w-12 h-12 bg-red-400 rounded-md items-center justify-center shadow-lg">
                     <Image source={Avatar} className = " w-full h-full rounded-md object-cover"/>
                 </View>
-                <TouchableOpacity onPress={() => setIsManualSearch(!isManualSearch)} style={{ backgroundColor: '#6CC070', borderRadius: 10, padding: 5 }}>
-<Text style={{ color: 'white', fontSize: 18 }}>{isManualSearch ? 'Switch to History' : 'Switch to Manual Search'}</Text>
-</TouchableOpacity>
+
+              </View>
+              <View className = "items-center">
+              <TouchableOpacity onPress={() => setIsManualSearch(!isManualSearch)} className = " bg-[#BED754] rounded-2xl p-2 w-[45%]">
+                <Text className = "font-semibold text-xl text-black">{isManualSearch ? 'Switch to History' : 'Switch to Manual Search'}</Text>
+                </TouchableOpacity>
               </View>
               {isManualSearch ? (
 <View style={{ padding: 10 }}>
-<View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 5, backgroundColor: 'white', borderRadius: 20 }}>
-<TextInput
-              placeholder="Search ..."
-              onChangeText={handleSearch}
-              value={searchQuery}
-              style={{ flex: 1 }}
-            />
-<TouchableOpacity onPress={() => handleSearch(searchQuery)}>
-<FontAwesome name="search" size={40} color="black" />
+<View className = "p-4 flex-row justify-between items-center">
+ 
+ <TextInput
+   placeholder="Search ..."
+   onChangeText={handleSearch}
+   value={searchQuery}
+   className = "bg-white text-black rounded-2xl p-4 px-5 w-[90%]"
+ />
+
+<TouchableOpacity>
+<FontAwesome name="search" size={24} color="white" />
 </TouchableOpacity>
+
+
+
 </View>
 <View style={{ flexDirection: 'row', padding: 10 }}>
 <FlatList

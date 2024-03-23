@@ -26,7 +26,7 @@ const FlatListWithTailwind = ({ searchQuery }) => {
         navigateToScreen(item.id);
       } : null}
       disabled={!searchQuery}
-      className={`flex-row items-center justify-between space-x-2 p-4 my-2  rounded-3xl ${selectedItemId === item.id ? 'bg-gray-200' : ''}`}
+      className={`flex-row items-center justify-between space-x-1 p-4   rounded-3xl ${selectedItemId === item.id ? 'bg-gray-200' : ''}`}
     >
       <Text className="text-2xl text-[#E3651D] rounded-md text-[20px] font-semibold">
         {item.title}
@@ -35,13 +35,13 @@ const FlatListWithTailwind = ({ searchQuery }) => {
   );
 
   return (
-    <View className="bg-[#191919] h-full w-full space-y-2">
+    <View className="bg-[#191919] h-full w-full space-y-1">
       <FlatList
         searchQuery={searchQuery}
         data={DATA}
         renderItem={renderItem}
         keyExtractor={item => item.id}
-        className="p-4"
+        className=""
       />
     </View>
   );
