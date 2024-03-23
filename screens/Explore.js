@@ -63,8 +63,9 @@ useEffect(() => {
 const [searchQuery, setSearchQuery] = useState('');
 const [searchResults, setSearchResults] = useState([]);
 const renderSearchResult = ({ item }) => {
-  const nonActionableMessages = ["please type alphabet for search", "you are typing wrong"];
+  const nonActionableMessages = ["please type alphabet for search", "you are typing wrong..!!"];
   const isNonActionableMessage = nonActionableMessages.includes(item);
+  console.log(nonActionableMessages.includes(item))
   return(
   <TouchableOpacity onPress={() =>  !isNonActionableMessage && handleSearch(item)} className = " mr-5 border-white border-2 rounded-2xl p-2" disabled={isNonActionableMessage} >
       <Text className = " text-red-400 text-[18px]">{item}</Text>
