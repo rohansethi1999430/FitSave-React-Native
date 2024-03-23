@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState, useRef } from 'react';
-import { View, Text, SafeAreaView, TextInput, TouchableOpacity, StyleSheet, Animated, Keyboard } from 'react-native';
+import { View, Text, SafeAreaView, TextInput, TouchableOpacity, StyleSheet, Animated, Keyboard,Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
@@ -16,10 +16,14 @@ const Plans5 = () => {
   }, []);
 
   const handleSearch = () => {
-    Keyboard.dismiss(); // Dismiss keyboard when searching
-    // Navigate to SearchedResults with the searchQuery as parameter
-    console.log("Search query 123 " + searchQuery)
-    navigation.navigate('SearchedResults', { searchQuery });
+    if (!searchQuery) {
+      // If searchQuery is null or empty, show an alert
+      Alert.alert('Input Error', 'Please provide input.');
+    } else {
+      // Proceed with search logic
+      Keyboard.dismiss(); // Dismiss keyboard when searching
+      navigation.navigate('SearchedResults', { searchQuery });
+    }
   };
 
   const handleParse = async () => {
