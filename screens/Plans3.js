@@ -1,12 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, FlatList, ActivityIndicator } from 'react-native';
+import React, { useState, useEffect,useLayoutEffect } from "react";
+import { View, Text, FlatList, ActivityIndicator, SafeAreaView, Image } from 'react-native';
 import ItemCardContainer from '../components/ItemCardContainer'; // Adjust the path as necessary
 import { fTApi3 } from '../api/callingExposedApis';
+import { useNavigation } from '@react-navigation/native'
+import { FitnessWorld } from "../assets";
 
-const Plans3 = ({ route }) => {
+const Plans1 = ({ route }) => {
   const { searchQuery } = route.params;
+
+  useLayoutEffect(() =>{
+    navigation.setOptions({
+      headerShown:false,
+    })
+  },[])
+
+  const navigation = useNavigation();
+
   const [mainData, setMainData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  console.log("Plans1"+searchQuery)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,12 +42,26 @@ const Plans3 = ({ route }) => {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <ActivityIndicator size="large" color="#0000ff" />
+        <Text>Please wait while we fetch the plans for you...</Text>
       </View>
     );
   }
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <SafeAreaView className = "bg-[#191919] items-center lex-1 relative h-full" >
+      <View className = "w-full items-center justify-center">
+
+      {/* <Image 
+      
+      source={FitnessWorld}
+      className = "w-[80%] h-[50%]"
+      >
+
+      </Image> */}
+        <Text className = "text-[#BED754] text-3xl font-bold p-2">
+          Planet Fitness
+        </Text>
+      </View>
       <FlatList
         data={mainData}
         keyExtractor={(item, index) => index.toString()}
@@ -52,8 +78,8 @@ const Plans3 = ({ route }) => {
         )
     }
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
-export default Plans3;
+export default Plans1;

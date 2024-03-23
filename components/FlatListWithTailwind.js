@@ -11,6 +11,10 @@ const DATA = [
 ];
 
 const FlatListWithTailwind = ({ searchQuery }) => {
+  if(searchQuery==""){
+    console.log("123");
+    
+  }
   const navigation = useNavigation();
   const [selectedItemId, setSelectedItemId] = useState(null);
 
@@ -34,18 +38,22 @@ const FlatListWithTailwind = ({ searchQuery }) => {
 
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity
-      onPress={searchQuery ? () => {
-        setSelectedItemId(item.id);
-        navigateToScreen(item.id);
-      } : null}
-      disabled={!searchQuery}
-      className={`flex-row items-center justify-between space-x-1 p-4   rounded-3xl ${selectedItemId === item.id ? 'bg-gray-200' : ''}`}
-    >
-      <Text className="text-2xl text-[#E3651D] rounded-md text-[20px] font-semibold">
-        {item.title}
-      </Text>
-    </TouchableOpacity>
+    
+<TouchableOpacity
+  onPress={() => {
+    if (!searchQuery && item.id !== '4' && item.id !== '5') {
+    
+      setSelectedItemId(item.id);
+      navigateToScreen(item.id);
+    }
+  }}
+  // disabled={!searchQuery}
+  className={`flex-row items-center justify-between space-x-1 p-4 rounded-3xl ${selectedItemId === item.id ? 'bg-gray-200' : ''}`}
+>
+  <Text className="text-2xl text-[#E3651D] rounded-md text-[20px] font-semibold">
+    {item.title}
+  </Text>
+</TouchableOpacity>
   );
 
   return (

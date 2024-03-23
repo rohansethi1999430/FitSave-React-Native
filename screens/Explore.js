@@ -35,7 +35,7 @@ const handleSearch = async (query) => {
   setSearchQuery(query);
   if (query.trim().length > 0) {
     try {
-      const response = await axios.get(`http://10.71.52.226:8080/manualSearchList/${query}`);
+      const response = await axios.get(`http://192.168.2.40:8090/manualSearchList/${query}`);
       setSearchResults(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -49,7 +49,7 @@ const handleSearch = async (query) => {
 const handleHistorySearch = async () => {
   setIsToggled(!isToggled);
   try {
-    const response = await axios.get('http://10.71.52.226:8080/historySearchList/history');
+    const response = await axios.get('http://192.168.2.40:8090/historySearchList/history');
     const searchHistory = Object.keys(response.data);
     setSearchHistoryResults(searchHistory);
   } catch (error) {
@@ -91,10 +91,13 @@ const renderSearchResult = ({ item }) => {
                 </View>
 
               </View>
-              <View className = "items-center">
+              <View className = "items-center flex-row p-1 w-[80%]" >
               {/* <TouchableOpacity onPress={() => setIsManualSearch(!isManualSearch)} className = " bg-[#BED754] rounded-2xl p-2 w-[45%]">
                 <Text className = "font-semibold text-xl text-black">{isManualSearch ? 'Switch to History' : 'Switch to Manual Search'}</Text>
                 </TouchableOpacity> */}
+                <Text className = "text-white p-2 font-semibold">
+                  Hit the toggle to switch between history & manual mode!!
+                </Text>
                 <TouchableOpacity onPress={() => setIsToggled(!isToggled)}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         {isToggled ? (
@@ -107,13 +110,13 @@ const renderSearchResult = ({ item }) => {
               </View>
               {isToggled ? (
 <View style={{ padding: 10 }}>
-<View className = "p-4 flex-row justify-between items-center">
+<View className = "p-2 flex-row justify-between items-center">
  
  <TextInput
    placeholder="Search ..."
    onChangeText={handleSearch}
    value={searchQuery}
-   className = "bg-white text-black rounded-2xl p-4 px-5 w-[90%]"
+   className = "bg-white text-black rounded-2xl p-3 px-4 w-[90%]"
  />
 
 <TouchableOpacity>
