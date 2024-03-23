@@ -98,7 +98,7 @@ const renderSearchResult = ({ item }) => (
                     source={require('../assets/Animation.json')} // Replace 'animation.json' with the path to your animation file
                     autoPlay
                     loop
-                    className = "w-full h-[25%]  object-cover p-2 mt-1"
+                    className = "w-full h-[20%]  object-cover p-2 mt-1"
                   />
                 <FlatListWithTailwind searchQuery={searchQuery}>
                   {console.log("Explore.js" +  searchQuery)}
