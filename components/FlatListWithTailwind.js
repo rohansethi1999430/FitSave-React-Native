@@ -42,7 +42,10 @@ const FlatListWithTailwind = ({ searchQuery }) => {
 <TouchableOpacity
   onPress={() => {
     if (!searchQuery && item.id !== '4' && item.id !== '5') {
-    
+      Alert.alert('Input Error', 'You have not type any to search for')
+ 
+    }
+    else{
       setSelectedItemId(item.id);
       navigateToScreen(item.id);
     }
