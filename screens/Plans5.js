@@ -28,7 +28,7 @@ const Plans5 = () => {
 
   const handleParse = async () => {
     try {
-      const response = await axios.get('http://192.168.2.40:8090/parsing');
+      const response = await axios.get('http://10.71.52.226:8090/parsing');
       // Handle the response data here
       console.log(response.data);
     } catch (error) {

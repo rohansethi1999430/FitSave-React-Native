@@ -15,7 +15,7 @@ const SearchedResults = () => {
       try {
         console.log(searchText); // Log searchText to verify if it's received correctly
         setIsLoading(true);
-        const response = await axios.post('http://192.168.2.40:8090/invertedIndexing', {
+        const response = await axios.post('http://10.71.52.226:8090/invertedIndexing', {
           text: searchText // Pass searchText directly without wrapping it in params
         });
         if (response.data && response.data.relevantSites) {

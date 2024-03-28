@@ -11,10 +11,7 @@ const DATA = [
 ];
 
 const FlatListWithTailwind = ({ searchQuery }) => {
-  if(searchQuery==""){
-    console.log("123");
-    
-  }
+
   const navigation = useNavigation();
   const [selectedItemId, setSelectedItemId] = useState(null);
 

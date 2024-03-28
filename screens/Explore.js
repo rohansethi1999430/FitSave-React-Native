@@ -35,7 +35,7 @@ const handleSearch = async (query) => {
   setSearchQuery(query);
   if (query.trim().length > 0) {
     try {
-      const response = await axios.get(`http://192.168.2.40:8090/manualSearchList/${query}`);
+      const response = await axios.get(`http://10.71.52.226:8090/manualSearchList/${query}`);
       setSearchResults(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -49,9 +49,25 @@ const handleSearch = async (query) => {
 const handleHistorySearch = async () => {
   setIsToggled(!isToggled);
   try {
-    const response = await axios.get('http://192.168.2.40:8090/historySearchList/history');
+    const response = await axios.get('http://10.71.52.226:8090/historySearchList/history');
     const searchHistory = Object.keys(response.data);
-    setSearchHistoryResults(searchHistory);
+
+    const searchHistoryKeys = Object.keys(response.data);
+    const searchHistoryValues = Object.values(response.data);
+    console.log(Object.keys(response.data) + (Object.values(response.data)));
+
+    const val = (Object.values(response.data))
+
+    const searchHistoryResults = searchHistoryKeys.map((key, index) => ({
+      term: key,
+      count: parseInt(searchHistoryValues[index])
+    }));
+
+    // Logging the search history results
+    console.log(searchHistoryResults);
+    // const splitValues = val.map(item => item.split(' '));
+    // console.log(val);
+     setSearchHistoryResults(searchHistoryResults);
   } catch (error) {
     console.error('Search History Error fetching data:', error);
   //  Alert.alert('Error', 'Failed to fetch data. Please try again later.');
@@ -138,18 +154,18 @@ const renderSearchResult = ({ item }) => {
 </View>
       ) : (
 <View style={{ flexDirection: 'row', padding: 10 }}>
-<FlatList
-            data={searchHistoryResults}
-            renderItem={({ item }) => (
-<TouchableOpacity onPress={() => handleSearch(item)}>
-<View style={{ backgroundColor: '#E5E5E5', borderRadius: 10, padding: 10, marginRight: 10 }}>
-<Text style={{ fontSize: 16, color: '#333333' }}>{item}</Text>
-</View>
-</TouchableOpacity>
-            )}
-            keyExtractor={(item, index) => index.toString()}
-            horizontal
-          />
+  <FlatList
+    data={searchHistoryResults}
+    renderItem={({ item }) => (
+      <TouchableOpacity onPress={() => handleSearch(item.term)}>
+        <View style={{ backgroundColor: '#E5E5E5', borderRadius: 10, padding: 10, marginRight: 10 }}>
+          <Text style={{ fontSize: 16, color: '#333333' }}>{item.term}: {item.count}</Text>
+        </View>
+      </TouchableOpacity>
+    )}
+    keyExtractor={(item, index) => index.toString()}
+    horizontal
+  />
 </View>
       )}
  
