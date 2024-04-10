@@ -3,7 +3,8 @@ import { View, Text, FlatList, ActivityIndicator, SafeAreaView, Image } from 're
 import ItemCardContainer from '../components/ItemCardContainer'; // Adjust the path as necessary
 import { fTApi1 } from '../api/callingExposedApis';
 import { useNavigation } from '@react-navigation/native'
-import { FitnessWorld } from "../assets";
+import { Avatar, FitnessWorld } from "../assets";
+import LottieView from 'lottie-react-native';
 
 const Plans1 = ({ route }) => {
   const { searchQuery } = route.params;
@@ -41,27 +42,59 @@ const Plans1 = ({ route }) => {
     // Show loading indicator while data is being fetched
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <ActivityIndicator size="large" color="#0000ff" />
-        <Text>Please wait while we fetch the plans for you...</Text>
+        {/* <ActivityIndicator size="large" color="#0000ff" /> */}
+        <LottieView
+        source={require('../assets/Animation - 1711974188907.json')} // Replace 'animation.json' with your Lottie animation file
+        autoPlay
+        loop
+        className = "w-[100%] h-[40%] mb-0"
+      />
+
+        <Text className = "font-semibold ">Please wait while we fetch the plans for you...</Text>
       </View>
     );
   }
 
   return (
-    <SafeAreaView className = "bg-[#191919] items-center lex-1 relative h-full" >
-      <View className = "w-full items-center justify-center">
+    <SafeAreaView className = "bg-black  relative h-full" >
+      {/* <View className = "w-full items-center justify-center">
 
-      {/* <Image 
+      <Image 
       
       source={FitnessWorld}
       className = "w-[80%] h-[50%]"
       >
 
-      </Image> */}
+      </Image>
         <Text className = "text-[#BED754] text-3xl font-bold p-2">
           Fitness World
         </Text>
-      </View>
+      </View> */}
+                    <View className = "flex-row items-center justify-between px-5 bg-black ">
+                <View>
+                    <Text className = "text-[40px] text-[#BED754] font-bold">
+                    Fitness
+                    </Text>
+ 
+                    <Text className = "text-[#E3651D] text-[36px] font-semibold">
+                    World
+                    </Text>
+                </View>
+ 
+                <View className = "w-12 h-12 bg-red-400 rounded-md items-center justify-center shadow-lg">
+                    <Image source={Avatar} className = " w-full h-full rounded-md object-cover"/>
+                </View>
+
+              </View>
+
+              <LottieView
+                    source={require('../assets/Animation - 1712011352766.json')} // Replace 'animation.json' with the path to your animation file
+                    autoPlay
+                    loop
+                    className = "w-full h-[15%]  p-2 mt-1"
+                  />
+
+
       <FlatList
         data={mainData}
         keyExtractor={(item, index) => index.toString()}
@@ -78,6 +111,9 @@ const Plans1 = ({ route }) => {
         )
     }
       />
+        <View>
+
+              </View>
     </SafeAreaView>
   );
 };

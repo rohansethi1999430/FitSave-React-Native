@@ -6,11 +6,12 @@ const ItemCardContainer = ({ title, location,data }) => {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity
-      className=" rounded-3xl border-white space-y-2 px-3 py-2 shadow-md w-[400px] my-2 bg-gray-700 justify-center p-5"
-      onPress={() => navigation.navigate("ItemScreen", { param: data })}
+<View className = "items-center">
+<TouchableOpacity
+      className=" rounded-3xl border-white space-y-2 px-3 py-2 shadow-md w-[350px] my-2 bg-gray-700 justify-center p-5"
+      // onPress={() => navigation.navigate("ItemScreen", { param: data })}
     >
-      <View className = "flex-row">
+      <View className = "">
       <Text className="text-[#428288] text-[18px] font-bold">
         {/* {title?.length > 14 ? `${title.slice(0, 14)}...` : title} */}
         {title}
@@ -40,6 +41,7 @@ const ItemCardContainer = ({ title, location,data }) => {
   keyExtractor={(item, index) => index.toString()}
 />
     </TouchableOpacity>
+</View>
   );
 };
 

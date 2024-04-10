@@ -20,7 +20,10 @@ const Explore = () => {
 
     const navigation = useNavigation();
     const [isManualSearch, setIsManualSearch] = useState(true);
-    const [searchHistoryResults, setSearchHistoryResults] = useState([]);
+    const [searchHistoryResults, setSearchHistoryResults] = useState(true);
+    const [historyFetched, setHistoryFetched] = useState(false);
+
+
     
 
  
@@ -30,12 +33,23 @@ useLayoutEffect(() =>{
   })
 },[])
 
- 
+// useEffect(() => {
+//   if (!historyFetched) {
+//     handleHistorySearch();
+//     setHistoryFetched(true);
+//   }
+// }, [historyFetched]); 
+
+const toggleSwitch = () => {
+  setIsToggled(!isToggled);
+  handleHistorySearch();
+};
+
 const handleSearch = async (query) => {
   setSearchQuery(query);
   if (query.trim().length > 0) {
     try {
-      const response = await axios.get(`http://10.71.52.226:8090/manualSearchList/${query}`);
+      const response = await axios.get(`http://192.168.2.35:8090/manualSearchList/${query}`);
       setSearchResults(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -49,7 +63,8 @@ const handleSearch = async (query) => {
 const handleHistorySearch = async () => {
   setIsToggled(!isToggled);
   try {
-    const response = await axios.get('http://10.71.52.226:8090/historySearchList/history');
+    const response = await axios.get('http://192.168.2.35:8090/historySearchList/history');
+    console.log("History called....")
     const searchHistory = Object.keys(response.data);
 
     const searchHistoryKeys = Object.keys(response.data);
@@ -91,8 +106,8 @@ const renderSearchResult = ({ item }) => {
 
  
   return (
-<SafeAreaView className = "bg-[#191919] flex-1 relative">
-              <View className = "flex-row items-center justify-between px-5 bg-[#191919] ">
+<SafeAreaView className = "bg-black flex-1 relative">
+              <View className = "flex-row items-center justify-between px-5  ">
                 <View>
                     <Text className = "text-[40px] text-[#BED754] font-bold">
                     Explore
@@ -115,7 +130,7 @@ const renderSearchResult = ({ item }) => {
                 <Text className = "text-white p-2 font-semibold">
                   Hit the toggle to switch between history & manual mode!!
                 </Text>
-                <TouchableOpacity onPress={() => setIsToggled(!isToggled)}>
+                <TouchableOpacity onPress={toggleSwitch}>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         {isToggled ? (
           <Feather name="toggle-left" size={35} color="white" />
@@ -175,10 +190,10 @@ const renderSearchResult = ({ item }) => {
               className=" h-60  rounded-md p-1 "
             /> */}
             <LottieView
-                    source={require('../assets/Animation.json')} // Replace 'animation.json' with the path to your animation file
+                    source={require('../assets/Animation - 1712010162604.json')} // Replace 'animation.json' with the path to your animation file
                     autoPlay
-                    loop
-                    className = "w-full h-[20%]  object-cover p-2 mt-1"
+                    loop = {false}
+                    className = "w-full h-[16%]  object-cover p-2 mt-1"
                   />
                 <FlatListWithTailwind searchQuery={searchQuery}>
                   {console.log("Explore.js" +  searchQuery)}

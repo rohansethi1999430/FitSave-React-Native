@@ -8,6 +8,7 @@ const DATA = [
   { id: '3', title: 'Planet Fitness'},
   { id: '4', title: 'Best Deal'},
   { id: '5', title: 'Search something about gyms?'},
+  { id: '6', title: 'Near By Gyms'},
 ];
 
 const FlatListWithTailwind = ({ searchQuery }) => {
@@ -29,8 +30,16 @@ const FlatListWithTailwind = ({ searchQuery }) => {
     return;
   }
     // Determine the screen to navigate to based on the id
-    const screenName = `Plans${id}`;
-    navigation.navigate(screenName, { searchQuery: searchQuery });
+    if(id=='6'){
+      const screenName = `Location`;
+      navigation.navigate(screenName, { searchQuery: searchQuery });
+    }
+    else{
+      const screenName = `Plans${id}`;
+      navigation.navigate(screenName, { searchQuery: searchQuery });
+    }
+    
+   
   };
 
 
@@ -57,7 +66,7 @@ const FlatListWithTailwind = ({ searchQuery }) => {
   );
 
   return (
-    <View className="bg-[#191919] h-full w-full space-y-1">
+    <View className="bg-black h-full w-full space-y-1">
       <FlatList
         searchQuery={searchQuery}
         data={DATA}

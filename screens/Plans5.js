@@ -1,7 +1,9 @@
 import React, { useLayoutEffect, useState, useRef } from 'react';
-import { View, Text, SafeAreaView, TextInput, TouchableOpacity, StyleSheet, Animated, Keyboard,Alert } from 'react-native';
+import { View, Text, SafeAreaView, TextInput, TouchableOpacity, StyleSheet, Animated, Keyboard,Alert,Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
+import { Avatar } from '../assets';
+import LottieView from 'lottie-react-native';
 
 const Plans5 = () => {
   const navigation = useNavigation();
@@ -28,7 +30,7 @@ const Plans5 = () => {
 
   const handleParse = async () => {
     try {
-      const response = await axios.get('http://10.71.52.226:8090/parsing');
+      const response = await axios.get('http://192.168.2.35:8090/parsing');
       // Handle the response data here
       console.log(response.data);
     } catch (error) {
@@ -51,10 +53,36 @@ const Plans5 = () => {
       useNativeDriver: false,
     }).start();
   };
-
+  // style={styles.container}
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
+    <SafeAreaView  className = "bg-black flex-1 relative">
+                    <View className = "flex-row items-center justify-between px-5  ">
+                <View>
+                    <Text className = "text-[40px] text-[#BED754] font-bold">
+                    Explore
+                    </Text>
+ 
+                    <Text className = "text-[#E3651D] text-[36px] font-semibold">
+                    GYM Plans
+                    </Text>
+                </View>
+ 
+                <View className = "w-12 h-12 bg-red-400 rounded-md items-center justify-center shadow-lg">
+                    <Image source={Avatar} className = " w-full h-full rounded-md object-cover"/>
+                </View>
+
+              </View>
+              {/* style={styles.header} */}
+
+              <LottieView
+                    source={require('../assets/Animation - 1712012069437.json')} // Replace 'animation.json' with the path to your animation file
+                    autoPlay
+                    loop 
+                    className = "w-full h-[20%]  object-cover p-2 mt-1"
+                  />
+      <View className = " m-3 items-center justify-center" >
+
+
       <Animated.View style={[styles.buttonContainer]}>
           <TouchableOpacity style={styles.button} onPress={handleParse}>
             <Text style={styles.buttonText}>Parse</Text>
@@ -62,7 +90,11 @@ const Plans5 = () => {
         </Animated.View>
         <Text style={styles.headerText}>Want To Search Something About Gym?</Text>
       </View>
-      <View style={styles.searchContainer}>
+
+
+
+      {/* style={styles.searchContainer} */}
+      <View  className = " p-4">
         <TextInput
           style={styles.input}
           placeholder="Search anything here..!!"
@@ -84,7 +116,7 @@ const Plans5 = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#191919',
+    backgroundColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
   },

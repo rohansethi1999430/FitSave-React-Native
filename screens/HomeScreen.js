@@ -17,7 +17,7 @@ useLayoutEffect(() =>{
 
   return (
 
-    <SafeAreaView className = "bg-[#191919] flex-1 relative">
+    <SafeAreaView className = "bg-black flex-1 relative">
 
       {/* First Section */}
 
