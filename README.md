@@ -1,6 +1,4 @@
-Based on the information provided in your resume, here is a README file for the FitSave Mobile App:
 
----
 
 # FitSave Mobile App
 
